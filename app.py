@@ -12,15 +12,12 @@ async def upload_form(request: Request):
     return templates.TemplateResponse("upload.html", {"request": request})
 
 @app.post("/upload", response_class=HTMLResponse)
-async def upload_file(request: Request, file: UploadFile = File(...)):
-    upload_dir = "uploads"
-    os.makedirs(upload_dir, exist_ok=True)
-    file_path = os.path.join(upload_dir, file.filename)
+async def handle_upload(request: Request, file: UploadFile = File(...)):
+    contents = await file.read()
+    decoded = contents.decode("utf-8")
 
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    # Basit örnek işlem: İlk 10 satırı göster
+    lines = decoded.splitlines()
+    preview = "\n".join(lines[:10])
 
-    # GPT yorum motoruna gönderim entegrasyonu burada yapılabilir
-
-    result = f"Yüklenen dosya: {file.filename} başarıyla kaydedildi."
-    return templates.TemplateResponse("upload.html", {"request": request, "result": result})
+    return templates.TemplateResponse("result.html", {"request": request, "result": preview})
