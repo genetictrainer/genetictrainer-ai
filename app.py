@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-import shutil
+import pdfplumber
 import os
 
 app = FastAPI()
@@ -12,12 +12,21 @@ async def upload_form(request: Request):
     return templates.TemplateResponse("upload.html", {"request": request})
 
 @app.post("/upload", response_class=HTMLResponse)
-async def handle_upload(request: Request, file: UploadFile = File(...)):
+async def upload_file(request: Request, file: UploadFile = File(...)):
     contents = await file.read()
-    decoded = contents.decode("utf-8")
 
-    # Basit örnek işlem: İlk 10 satırı göster
-    lines = decoded.splitlines()
-    preview = "\n".join(lines[:10])
+    if file.filename.endswith(".pdf"):
+        with open("temp.pdf", "wb") as f:
+            f.write(contents)
+
+        extracted_text = ""
+        with pdfplumber.open("temp.pdf") as pdf:
+            for page in pdf.pages:
+                extracted_text += page.extract_text() or ""
+
+        os.remove("temp.pdf")
+        preview = extracted_text[:2000]
+    else:
+        preview = "Lütfen sadece PDF dosyası yükleyin."
 
     return templates.TemplateResponse("result.html", {"request": request, "result": preview})
