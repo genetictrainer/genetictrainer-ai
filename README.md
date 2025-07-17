@@ -1,1 +1,3 @@
-u depo, Genetic Trainer sistemine göre AI destekli test yorumlama motorunu içerir.
+# GeneticTrainer AI Yorumlama Motoru
+
+Bu servis, DNA test sonuçlarını Genetic Trainer sistemine göre yorumlamak üzere hazırlanmıştır.
