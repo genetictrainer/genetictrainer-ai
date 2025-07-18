@@ -1,58 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>DNA Dosyanızı Yükleyin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 80px auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        input[type="file"] {
-            display: block;
-            margin: 20px auto;
-        }
-
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Genetic Trainer AI - Test Yorumlama Formu</title>
 </head>
 <body>
-    <div class="container">
-        <h1>DNA Dosyanızı Yükleyin</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".pdf" required>
-            <button type="submit">Yükle ve Yorumla</button>
-        </form>
-    </div>
+    <h2>Genetik Test Yorumlama Formu</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Ad Soyad:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="birth_date">Doğum Tarihi:</label><br>
+        <input type="date" id="birth_date" name="birth_date" required><br><br>
+
+        <label for="gender">Cinsiyet:</label><br>
+        <select id="gender" name="gender" required>
+            <option value="Erkek">Erkek</option>
+            <option value="Kadın">Kadın</option>
+        </select><br><br>
+
+        <label for="sport">Spor Branşı:</label><br>
+        <select id="sport" name="sport" required>
+            <option value="Fitness">Fitness</option>
+            <option value="Futbol">Futbol</option>
+            <option value="Yüzme">Yüzme</option>
+            <option value="Atletizm">Atletizm</option>
+            <option value="Diğer">Diğer</option>
+        </select><br><br>
+
+        <label for="goal">Hedef:</label><br>
+        <select id="goal" name="goal" required>
+            <option value="Kas Geliştirme">Kas Geliştirme</option>
+            <option value="Yağ Yakımı">Yağ Yakımı</option>
+            <option value="Dayanıklılık">Dayanıklılık</option>
+            <option value="Genel Sağlık">Genel Sağlık</option>
+        </select><br><br>
+
+        <label for="pdf_file">Genetik Test Sonucu (PDF):</label><br>
+        <input type="file" id="pdf_file" name="pdf_file" accept=".pdf" required><br><br>
+
+        <label for="notes">Ek Bilgi / Notlar:</label><br>
+        <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br><br>
+
+        <input type="submit" value="Yorumla">
+    </form>
 </body>
 </html>
